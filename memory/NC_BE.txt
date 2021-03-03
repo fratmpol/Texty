@@ -1,0 +1,16 @@
+hello,good,4.0
+hello,fine,1.0
+war,bad,7.5
+death,bad,3.0
+good,fine,1.0
+good,peace,11.0
+goos,love,1.0
+good,love,2.0
+water,liquid,2.0
+sea,water,3.0
+lava,hot,3.0
+floor,house,3.0
+peace,love,3.0
+good,vegetables,1.0
+war,death,2.0
+war,good,2.0

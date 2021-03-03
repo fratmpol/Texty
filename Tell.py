@@ -1,0 +1,18 @@
+class Tell:
+
+    def __init__(self):
+        self.input = list()
+        self.output = "Answer:"
+
+    def answer_construction(self):
+        for x in self.input:
+            if "beT" in x:
+                self.output = self.output + f' {x[0]} is {x[1]} .'
+
+    def answer(self):
+        self.answer_construction()
+        print(self.output)
+
+    def clear(self):
+        self.input.clear()
+        self.output = "Answer"
