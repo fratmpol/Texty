@@ -443,21 +443,16 @@ from InternalProcessing import IP
 from Tell import Tell
 from NNGestor import NNG
 from Be import Be
+from flask import Flask, render_template, request
 
 def main(inp):
-
-    # NN list (Network Neurons)
-    NN = list()
-
+    NN = list() # NN list (Network Neurons)
     nng = NNG(NN)
     nng.load()
-    NN = nng.nn # ce l'hai già in NN riga 450
-    #print(NN)
+    NN = nng.nn
     be = Be(NN)
     be.load()
-    #print(be.NC_be)
     be.bump_normalizer()
-    #print(be.bump_norm)
 
     read = Read()
     ip = IP(NN, be)
@@ -477,11 +472,9 @@ def main(inp):
         tell.clear()
     return ans
 
-from flask import Flask, flash, render_template, url_for, request, redirect, send_from_directory
-
 app = Flask(__name__)
 
-# Home page with upload
+# Home page and post request
 @app.route('/', methods=['GET', 'POST'])
 def refresh_results():
     if request.method == 'POST':
