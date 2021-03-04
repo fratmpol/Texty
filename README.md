@@ -11,7 +11,7 @@ This is a simple ai (WIP).
 1. Run on python3 : \
 `pip install requirements.txt`
 
-2. Run \
+2. Run : \
 `python app.py`
 
 ## How to use
