@@ -1,8 +1,8 @@
-from Read import Read
-from InternalProcessing import IP
-from Tell import Tell
-from NNGestor import NNG
-from Be import Be
+from classes.Read import Read
+from classes.InternalProcessing import IP
+from classes.Tell import Tell
+from classes.NNGestor import NNG
+from classes.Be import Be
 from flask import Flask, render_template, request
 
 def main(inp):
