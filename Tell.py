@@ -7,7 +7,7 @@ class Tell:
     def answer_construction(self):
         for x in self.input:
             if "beT" in x:
-                self.output = self.output + f' {x[0]} is {x[1]} .'
+                self.output = self.output + f' {x[0]} is {x[1]}.'
 
     def answer(self):
         self.answer_construction()
