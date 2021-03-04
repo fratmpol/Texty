@@ -138,7 +138,10 @@ class Be:
                 sel["id"] = i
                 sel["range"] = rang
                 selectors.append(sel)
-            selection = random.randrange(sum)
+                csum = int(sum)
+                if csum == 0:
+                    csum = 1
+            selection = random.randrange(csum)
             found = 0
         else:
             print('error: links not found')
