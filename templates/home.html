@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Texty</title>
+    <style>
+        p {
+            white-space: pre-line;
+        }
+        
+        div {
+            border: .1rem;
+            border-color: #ffffff;
+            border-style: solid;
+            border-radius: .8rem;
+            padding: 3vh;
+            background-color: rgb(22, 22, 22);
+        }
+        
+        body {
+            background-color: #313131;
+            display: grid;
+            justify-content: center;
+            font-family: 'Open Sans', sans-serif;
+            color: #ffffff;
+            font-size: 120%;
+        }
+        
+        h1 {
+            color: aquamarine;
+            text-align: center;
+            margin-top: 5vh;
+            margin-bottom: 7vh;
+        }
+        
+        form {
+            color: #dbdbdb;
+            text-align: center;
+            margin-bottom: 5vh;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Texty</h1>
+    <form method=post>
+        <input type="text" name="text" value="{{ inp }}">
+        <button type="submit">Send</button>
+    </form>
+    <div>
+        <p>{{ main }}</p>
+    </div>
+</body>
+
+</html>
