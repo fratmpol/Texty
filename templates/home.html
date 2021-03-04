@@ -40,19 +40,20 @@
             color: #dbdbdb;
             text-align: center;
             margin-bottom: 5vh;
+            margin-top: 5vh;
         }
     </style>
 </head>
 
 <body>
     <h1>Texty</h1>
+    <div>
+        <p>{{ main }}</p>
+    </div>
     <form method=post>
         <input type="text" name="text" value="{{ inp }}">
         <button type="submit">Send</button>
     </form>
-    <div>
-        <p>{{ main }}</p>
-    </div>
 </body>
 
 </html>
