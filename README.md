@@ -6,8 +6,8 @@ COMMANDS:
 
 output:
 /Tell -> let texty say something
-/Free -> let texty make new connection and say something (WYP)
-name /Ftell-> force something to say something about the word you choose (WYP)
+/Free -> let texty make new connection and say something (WIP)
+name /Ftell-> force something to say something about the word you choose (WIP)
 
 input:
 name1 /is name2 -> teach texty a new strong connection between two words

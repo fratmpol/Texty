@@ -436,7 +436,7 @@
 #     save(NN, NC)
 
 
-# CLASS WAY (WYP)
+# CLASS WAY (WIP)
 
 from Read import Read
 from InternalProcessing import IP
@@ -444,52 +444,52 @@ from Tell import Tell
 from NNGestor import NNG
 from Be import Be
 
-
-
-def main():
+def main(inp):
 
     # NN list (Network Neurons)
     NN = list()
 
     nng = NNG(NN)
     nng.load()
-    NN = nng.nn
-    print(NN)
+    NN = nng.nn # ce l'hai già in NN riga 450
+    #print(NN)
     be = Be(NN)
     be.load()
-    print(be.NC_be)
+    #print(be.NC_be)
     be.bump_normalizer()
-    print(be.bump_norm)
+    #print(be.bump_norm)
 
     read = Read()
     ip = IP(NN, be)
     tell = Tell()
+    ans = ">> "
 
+    if inp != "\exit":
+        read.input = inp
+        read.read()
+        ip.int_input = read.IP_int_output
+        ip.out_input = read.IP_out_output
+        ip.processing()
+        tell.input = ip.tell_output
+        ans = ">> "+str(tell.answer())
+        read.clear()
+        ip.clear()
+        tell.clear()
+    return ans
 
+from flask import Flask, flash, render_template, url_for, request, redirect, send_from_directory
+
+app = Flask(__name__)
+
+# Home page with upload
+@app.route('/', methods=['GET', 'POST'])
+def refresh_results():
+    if request.method == 'POST':
+        if request.form["text"] != "":
+            inp = request.form["text"]
+            return render_template('home.html', main=str(">> "+inp+"\n")+str(main(inp)), inp="")
     inp = ""
+    return render_template('home.html', main=main(inp), inp=inp)
 
-    while inp != "\exit":
-        print(">> ")
-        inp = input()
-
-        if inp != "\exit":
-            read.input = inp
-            read.read()
-            ip.int_input = read.IP_int_output
-            ip.out_input = read.IP_out_output
-            ip.processing()
-            tell.input = ip.tell_output
-            tell.answer()
-            read.clear()
-            ip.clear()
-            tell.clear()
-
-
-
-
-
-
-
-
-
-main()
+if __name__ == '__main__':
+    app.run()

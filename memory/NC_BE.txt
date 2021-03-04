@@ -14,3 +14,5 @@ peace,love,3.0
 good,vegetables,1.0
 war,death,2.0
 war,good,2.0
+War,bad,1.0
+War,bad,2.0

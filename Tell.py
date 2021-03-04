@@ -11,8 +11,8 @@ class Tell:
 
     def answer(self):
         self.answer_construction()
-        print(self.output)
+        return self.output
 
     def clear(self):
         self.input.clear()
-        self.output = "Answer"
+        self.output = "Answer:"
