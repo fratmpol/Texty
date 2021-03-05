@@ -1,6 +1,6 @@
 
-from Base import Base
-from NNGestor import NNG
+from classes.Base import Base
+from classes.NNGestor import NNG
 import random
 
 class Be:
