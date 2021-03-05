@@ -1,4 +1,4 @@
-from Be import Be
+from classes.Be import Be
 
 class IP:
 
