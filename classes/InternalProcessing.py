@@ -1,8 +1,8 @@
-from classes.Be import Be
+from Be import Be
 
 class IP:
 
-    control = False
+    control = True
 
 
     def __init__(self, NN, i_be):
@@ -37,13 +37,17 @@ class IP:
                 self.nn = self.be.nn
             elif  x == "/Ftell":
                 out = self.be.force_tell(self.out_input[i-1], self.control)
-                out.append("beT")
-                self.tell_output.append(out.copy())
-                out.clear()
-                self.nn = self.be.nn
+                if 'connection_not_found534' in out:
+                    self.tell_output.append('Sorry I don\'t know anithyng about this word yet')
+                    out.clear()
+                    self.nn = self.be.nn
+                else:
+                    out.append("beT")
+                    self.tell_output.append(out.copy())
+                    out.clear()
+                    self.nn = self.be.nn
             elif  x == "/Free":
                 out = self.be.free_tell(self.control)
-                print(out)
                 out.append("beT")
                 self.tell_output.append(out.copy())
                 out.clear()

@@ -1,6 +1,6 @@
 
-from classes.Base import Base
-from classes.NNGestor import NNG
+from Base import Base
+from NNGestor import NNG
 import random
 
 class Be:
@@ -116,7 +116,8 @@ class Be:
     # OUTPUT True \\ False (sottoforma di 0 o 1)
     def bump_method(self, nn1):
         links = self.search_nc(nn1)
-        print(links)
+        if links == -1:
+            return False                                                                                                # se non ci sono collegamenti nonfare il bump
         switch = self.bump_switch(len(links))
         return switch
 
@@ -138,10 +139,7 @@ class Be:
                 sel["id"] = i
                 sel["range"] = rang
                 selectors.append(sel)
-                csum = int(sum)
-                if csum == 0:
-                    csum = 1
-            selection = random.randrange(csum)
+            selection = random.randrange(int(sum))
             found = 0
         else:
             print('error: links not found')
@@ -155,6 +153,47 @@ class Be:
         to_g = to_g[0]
         to_ret= [nn1, to_g]
         return to_ret
+
+    # Metodo di scelta collegamenti per bump
+    # tramite scelta randomica sceglie due parole da accostare e chiede quanto ahnno senso da 1 a 100                       TEMPORANEO (DA RIVEDERE)
+    #elimina i collegamenti uguali a quelli in entrata
+    # ritorna il nome della NN corrispondendte al collegamento scelto
+    # INPUT: NC \\ NN1 da cui far aprtire il link
+    # OUTPUT: NN2 a cui il link arriva da NN1
+    def bump_link_method(self, couple):
+        options = self.search_nc(couple[1])
+        sum = 0
+        selector = {"id": 0, "range": (0, 1)}
+        selectors = list()
+        if options != -1:
+            for i in options:
+                if couple[0] in self.NC_be[i].get('elements'):
+                    if len(options) == 1:
+                        print(f'BUMP ERROR: bump_link_methods: BUMP NOT POSSIBLE, only one link aviable for words: {couple[0]} and {couple[1]}')
+                        return 2
+                    else:
+                        continue
+                rang = [sum, sum + self.NC_be[i].get('counter')]
+                sum = rang[1]
+                sel = selector.copy()
+                sel["id"] = i
+                sel["range"] = rang
+                selectors.append(sel)
+            selection = random.randrange(int(sum))
+            found = 0
+        else:
+            print(f'LINK ERROR: links not found for word {couple[0]}')
+            return 1
+        for x in selectors:
+            if selection <= x.get("range")[1] and selection >= x.get("range")[0]:
+                found = x.get("id")
+                break
+        to_g = self.NC_be[found].get("elements").copy()
+        to_g.remove(couple[1])
+        to_g = to_g[0]
+        to_ret= [couple[1], to_g]
+        return to_ret
+
 
     # INPUT PRIMARY METHODS
 
@@ -176,7 +215,6 @@ class Be:
             new_nc['counter'] = increment
             self.NC_be.append(new_nc)
         else:
-            old = self.NC_be[sr].copy()
             self.NC_be[sr]['counter'] = self.NC_be[sr]['counter'] + increment
 
     # INPUT SECONDARY METHODS
@@ -196,23 +234,29 @@ class Be:
             self.nng.save()
             print("TEMPORARY ERROR: the word does not have NC")
         to_ass = self.link_method(nn1)
-        print(to_ass)
-        if not output:
-            return to_ass
+        print('first', to_ass)
+
+        if to_ass != 1:
+
+            if not output:
+                return to_ass
+            else:
+
+                while self.bump_method(to_ass[1]):
+                    print('bump!', to_ass[1])
+                    temp = self.bump_link_method(to_ass)
+                    while temp == nn1:
+                        temp = self.bump_link_method(to_ass)
+                    print(temp)
+                    to_ass = temp
+                return [nn1,to_ass[1]]
         else:
-            while self.bump_method(to_ass[1]):
-                temp = self.link_method(to_ass[1])
-                while temp == nn1:
-                    temp = self.link_method(to_ass[1])
-                to_ass[1] = temp
-                print(temp)
-            return to_ass
+            return ['connection_not_found534']
 
     # verbo dire libero
     # fa dire qualcosa a texty (bump attivo)
     def free_tell(self, output):
         i = random.randrange(len(self.nn))
-        print(self.nn[i])
         return self.force_tell(self.nn[i], output)
 
     #ritornano in output le cose da dire e il loro livello di connessione
@@ -222,13 +266,13 @@ class Be:
     # verbo essere
     # crea un collegamento forte
     def be(self, nn1, nn2):
-        self.connection_method(nn1, nn2, 1)
+        self.connection_method(nn1, nn2, 10000)
         self.save()
 
     # verbo sembrare
     # crea un collegamento debole
     def seems(self, nn1, nn2):
-        self.connection_method(nn1, nn2, 0.5)
+        self.connection_method(nn1, nn2, 5000)
         self.save()
 
 
