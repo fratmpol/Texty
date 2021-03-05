@@ -38,7 +38,7 @@ class IP:
             elif  x == "/Ftell":
                 out = self.be.force_tell(self.out_input[i-1], self.control)
                 if 'connection_not_found534' in out:
-                    self.tell_output.append('Sorry I don\'t know anithyng about this word yet')
+                    self.tell_output.append('Sorry I don\'t know anything about this word yet')
                     out.clear()
                     self.nn = self.be.nn
                 else:
