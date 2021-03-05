@@ -11,6 +11,7 @@ class Read:
     def subdivider(self):
         self.in_output = self.input.split(" ")
         to_add = ["ç", "ç"]
+        temp = self.in_output.copy()
         for i, x in enumerate(self.in_output):
             if "." in x or ":" in x or "," in x or ";" or "?" in x or "!" in x:
                 if "." in x:
@@ -26,13 +27,15 @@ class Read:
                 if "?" in x:
                     to_add = x.split("!")
                 if to_add[0] != "ç":
-                    self.in_output.remove(x)
-                    if len(self.in_output) == i:
-                        self.in_output.append(to_add[0])
-                        self.in_output.append(to_add[1])
+                    temp.remove(x)
+                    if len(temp) == i:
+                        temp.append(to_add[0])
+                        temp.append(to_add[1])
                     else:
-                        self.in_output.insert(i, to_add[1])
-                        self.in_output.insert(i, to_add[0])
+                        temp.insert(i, to_add[1])
+                        temp.insert(i, to_add[0])
+        self.in_output = temp.copy()
+        temp.clear()
 
 
     # METODO REFRATTORI TEMPORANEO
