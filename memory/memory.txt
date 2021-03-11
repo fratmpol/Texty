@@ -18,3 +18,5 @@ vegetables
 War
 bad
 /Ftell
+digitalmarketer
+alessio
