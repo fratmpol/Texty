@@ -3,7 +3,7 @@ from classes.InternalProcessing import IP
 from classes.Tell import Tell
 from classes.NNGestor import NNG
 from classes.Be import Be
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect
 
 def main(inp):
     NN = list() # NN list (Network Neurons)
@@ -39,6 +39,8 @@ app = Flask(__name__)
 def refresh_results():
     if request.method == 'POST':
         if request.form["text"] != "":
+            if request.form["text"] == "/Help":
+                return redirect("https://github.com/fratmpol/Texty/blob/fratmpol-patch-2/README.md")
             inp = request.form["text"]
             return render_template('home.html', main=str(">> "+inp+"\n")+str(main(inp)), inp="")
     inp = ""
