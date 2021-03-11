@@ -16,3 +16,4 @@ war,death,2.0
 war,good,2.0
 War,bad,1.0
 War,bad,2.0
+alessio,digitalmarketer,10.0
